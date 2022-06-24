@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="css.quanlimuavu.css">
+    <title>Quản lí mùa vụ</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="sidebar d-md-block collapse navbar-collapse bg-dark" id="sidebar">
+            <div class="d-flex justify-content-between border-bottom border-secondary">
+                <h2 class="text-white p-3 title">Quản lí mùa vụ</h2>
+            </div>
+            <ul class="pl-0">
+                <li class="sidebar-list py-2"><a class="d-block text-white text-decoration-none" href="/webcuoiki/QuanLiTrangTrai/dashboard.html"><i class="h4 ml-3 mr-4 fa-solid fa-chart-line"></i></i>Đăng xuất</a></li>
+                <li class="sidebar-list py-2"><a class="d-block text-white text-decoration-none" href="/webcuoiki/QuanLiTrangTrai/QuanLiNguoiDung/user/quanliuser.html"><i class="h4 ml-3 mr-4 fa-solid fa-user"></i>Quản lí người dùng</a></li>
+            </ul>
+        </div>
+        <div class="content w-100 bg-light">
+            <nav class="bg-white w-100 px-3 py-2">
+                <div class="row mx-0 bg-white">
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn text-white bg-white d-md-none navbar-toggler navbar-light" data-toggle="collapse" data-target="#sidebar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="input-group border rounded d-none d-md-flex row ml-1">
+                        <div class="col-11 px-0">
+                            <input type="text" class="form-control border-0" id="search" placeholder="Search Here" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group-prepend mt-1 col-1 pl-5 search-icon">
+                        <span class="input-group-text bg-white border-0" id="loop"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-primary m-3" id="add" type="button">Add</button>
+                    </div>
+                </div>
+            </nav>
+            <table class="table text-center">
+                <thead>
+                  <tr>
+                    <th scope="col" class="border">ID</th>
+                    <th scope="col" class="border">Tên mùa vụ</th>
+                    <th scope="col" class="border">Ngày bắt đầu</th>
+                    <th scope="col" class="border">Ngày kết thúc</th>
+                    <th scope="col" class="border">Sản lượng thực tế</th>
+                    <th scope="col" class="border">Sản lượng ước lượng</th>
+                    <th scope="col" class="border">Nhận xét mùa vụ</th>
+                    <th scope="col" class="border">Sửa/Kết thúc/Xoá</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="addModal">
+            <h2 class="text-center">Thêm mùa vụ</h2>
+            <input class="seasonName" type="text" required placeholder="Nhập tên mùa vụ">
+            <input class="quantityEstimated" type="text" required placeholder="Sản lượng ước tính">
+            <input class="unit" type="text" disabled placeholder="Đơn vị tính: Kg">
+            <input class="dateStart" type="datetime" placeholder="Ngày bắt đầu">
+            <input class="dateEnd" type="datetime" placeholder="Ngày dự kiến thu hoạch">
+            <input class="state" type="text" placeholder="State" value="Trong mùa vụ">
+            <div class="button d-flex justify-content-end">
+                <button class="addCancel btn btn-secondary">Cancel</button>
+                <button id="addSuccess" class="btn btn-primary ml-3">Add</button>
+            </div>
+        </div>
+        <div class="editModal">
+            <h2 class="text-center">Sửa mùa vụ</h2>
+            <input type="text" disabled class="txtId">
+            <input class="seasonName" type="text" placeholder="Nhập tên mùa vụ mới">
+            <input class="dateStart" type="dateStart" placeholder="Nhập ngày bắt đầu mới">
+            <input class="dateEnd" type="dateEnd" placeholder="Nhập ngày kết thúc mới">
+            <input class="state" type="text" placeholder="Nhập trạng thái mới">
+            <div class="button d-flex justify-content-end">
+                <button class="editCancel btn btn-secondary">Cancel</button>
+                <button id="editSuccess" class="btn btn-primary ml-3">Edit</button>
+            </div>
+        </div>
+        <div class="finalModal">
+            <h2 class="text-center">Thông tin kết thúc mùa vụ</h2>
+            <input type="text" disabled class="txtId">
+            <input class="quantity" type="text" placeholder="Sản lượng đạt được">
+            <input class="state" type="text" placeholder="Nhập trạng thái kết thúc">
+            <input type="datetime" class="dateEnd" placeholder="Nhập thời gian kết thúc">
+            <div class="button d-flex justify-content-end">
+                <button class="finalCancel btn btn-secondary">Cancel</button>
+                <button id="finalSuccess" class="btn btn-primary ml-3">Check</button>
+            </div>
+        </div>
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./js-quanlimuavu.js"></script>
+</body>
+</html>
